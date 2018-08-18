@@ -18,7 +18,7 @@ module.exports = function (RED) {
         const matched = stdout.match(regex)
         node.send({
           payload: matched[1], // free
-          topic: 'memory_free'
+          topic: 'memory_used_mb'
         })
       })
     })

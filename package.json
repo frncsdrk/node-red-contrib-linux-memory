@@ -1,7 +1,7 @@
 {
-  "name": "node-red-contrib-memory",
+  "name": "node-red-contrib-linux-memory",
   "version": "0.1.0",
-  "description": "collect system memory stats",
+  "description": "collect linux system memory stats",
   "main": "memory.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,8 @@
     "node-red",
     "memory",
     "performance",
-    "system"
+    "system",
+    "linux"
   ],
   "author": "frncsdrk",
   "license": "MIT",

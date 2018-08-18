@@ -1,0 +1,34 @@
+<script>
+  RED.nodes.registerType(
+    'memory',
+    {
+      category: 'performance',
+      color: '#4b8d7d',
+      defaults: {
+        name: {
+          value: ''
+        }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: 'memory.png',
+      label: function () {
+        return this.name || 'Memory'
+      },
+      oneditprepare: function () {
+        // select defaults
+      }
+    }
+  )
+</script>
+
+<script type="text/x-red" data-template-name="memory">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+</script>
+
+<script type="text/x-red" data-help-name="memory">
+  <p>A node to monitor system memory usage</p>
+</script>

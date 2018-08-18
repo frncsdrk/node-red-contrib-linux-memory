@@ -1,0 +1,30 @@
+{
+  "name": "node-red-contrib-memory",
+  "version": "0.1.0",
+  "description": "collect system memory stats",
+  "main": "memory.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frncsdrk/node-red-contrib-memory.git"
+  },
+  "keywords": [
+    "node-red",
+    "memory",
+    "performance",
+    "system"
+  ],
+  "author": "frncsdrk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frncsdrk/node-red-contrib-memory/issues"
+  },
+  "homepage": "https://github.com/frncsdrk/node-red-contrib-memory#readme",
+  "node-red"     : {
+    "nodes": {
+      "memory": "memory.js"
+    }
+  }
+}

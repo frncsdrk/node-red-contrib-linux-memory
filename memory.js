@@ -11,7 +11,7 @@ module.exports = function (RED) {
     node.on('input', (msg) => {      
       exec('free -mt | grep "Total"', (err, stdout, stderr) => {
         if (err) {
-          node.error('Error', err.message)
+          node.error('child_process exec Error', err.message)
           return false
         }
         const regex = /[0-9]+/g

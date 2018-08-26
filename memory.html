@@ -7,6 +7,12 @@
       defaults: {
         name: {
           value: ''
+        },
+        totalMemory: {
+          value: false
+        },
+        usedMemory: {
+          value: true
         }
       },
       inputs: 1,
@@ -17,6 +23,12 @@
       },
       oneditprepare: function () {
         // select defaults
+        if (typeof this.totalMemory === 'undefined') {
+          $('#node-input-totalMemory').prop('checked', false)
+        }
+        if (typeof this.usedMemory === 'undefined') {
+          $('#node-input-usedMemory').prop('checked', true)
+        }
       }
     }
   )
@@ -26,6 +38,14 @@
   <div class="form-row">
     <label for="node-input-name"><i class="icon-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+    <label for="node-input-totalMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display total memory</label>
+    <input type="checkbox" id="node-input-totalMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
+    <label for="node-input-usedMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display used memory</label>
+    <input type="checkbox" id="node-input-usedMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
 </script>
 

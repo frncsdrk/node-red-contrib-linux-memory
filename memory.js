@@ -5,10 +5,12 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, conf)
 
     this.name = conf.name
+    this.totalMemory = (typeof conf.totalMemory === 'undefined') ? true : conf.totalMemory
+    this.usedMemory = (typeof conf.usedMemory === 'undefined') ? true : conf.usedMemory
 
     const node = this
 
-    node.on('input', (msg) => {      
+    node.on('input', (msg) => {
       exec('free -mt | grep "Total"', (err, stdout, stderr) => {
         if (err) {
           node.error('child_process exec Error', err.message)
@@ -16,10 +18,20 @@ module.exports = function (RED) {
         }
         const regex = /[0-9]+/g
         const matched = stdout.match(regex)
-        node.send({
-          payload: matched[1], // free
-          topic: 'memory_used_mb'
-        })
+        let payloadArr = []
+        if (this.totalMemory) {
+          payloadArr.push({
+            payload: matched[0], // total
+            topic: 'memory_total_mb'
+          })
+        }
+        if (this.usedMemory) {
+          payloadArr.push({
+            payload: matched[1], // used
+            topic: 'memory_used_mb'
+          })
+        }
+        node.send([ payloadArr ])
       })
     })
   }

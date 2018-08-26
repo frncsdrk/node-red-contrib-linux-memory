@@ -13,6 +13,9 @@
         },
         usedMemory: {
           value: true
+        },
+        freeMemory: {
+          value: false
         }
       },
       inputs: 1,
@@ -28,6 +31,9 @@
         }
         if (typeof this.usedMemory === 'undefined') {
           $('#node-input-usedMemory').prop('checked', true)
+        }
+        if (typeof this.freeMemory === 'undefined') {
+          $('#node-input-freeMemory').prop('checked', false)
         }
       }
     }
@@ -46,6 +52,10 @@
   <div class="form-row">
     <label for="node-input-usedMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display used memory</label>
     <input type="checkbox" id="node-input-usedMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
+    <label for="node-input-freeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free memory</label>
+    <input type="checkbox" id="node-input-freeMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
 </script>
 

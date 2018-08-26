@@ -7,6 +7,7 @@ module.exports = function (RED) {
     this.name = conf.name
     this.totalMemory = (typeof conf.totalMemory === 'undefined') ? true : conf.totalMemory
     this.usedMemory = (typeof conf.usedMemory === 'undefined') ? true : conf.usedMemory
+    this.freeMemory = (typeof conf.freeMemory === 'undefined') ? true : conf.freeMemory
 
     const node = this
 
@@ -29,6 +30,12 @@ module.exports = function (RED) {
           payloadArr.push({
             payload: matched[1], // used
             topic: 'memory_used_mb'
+          })
+        }
+        if (this.freeMemory) {
+          payloadArr.push({
+            payload: matched[2], // free
+            topic: 'memory_free_mb'
           })
         }
         node.send([ payloadArr ])

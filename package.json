@@ -23,9 +23,12 @@
     "url": "https://github.com/frncsdrk/node-red-contrib-memory/issues"
   },
   "homepage": "https://github.com/frncsdrk/node-red-contrib-memory#readme",
-  "node-red"     : {
+  "node-red": {
     "nodes": {
       "memory": "memory.js"
     }
+  },
+  "dependencies": {
+    "systeminformation": "^3.44.0"
   }
 }

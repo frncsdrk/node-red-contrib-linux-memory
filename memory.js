@@ -9,12 +9,15 @@ module.exports = function (RED) {
   function MemoryNode (conf) {
     RED.nodes.createNode(this, conf)
 
+    console.log('conf:', conf)
+
     this.name = conf.name
-    this.absolute = (typeof conf.absolute === 'undefined') ? true : conf.absolute
-    this.relative = (typeof conf.relative === 'undefined') ? false : conf.relative
+    this.relativeValues = (typeof conf.relativeValues === 'undefined') ? false : conf.relativeValues
     this.totalMemory = (typeof conf.totalMemory === 'undefined') ? false : conf.totalMemory
     this.usedMemory = (typeof conf.usedMemory === 'undefined') ? true : conf.usedMemory
     this.freeMemory = (typeof conf.freeMemory === 'undefined') ? false : conf.freeMemory
+
+    console.log('relativeValues:', this.relativeValues)
 
     const node = this
 

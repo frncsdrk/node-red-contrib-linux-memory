@@ -8,6 +8,9 @@
         name: {
           value: ''
         },
+        relativeValues: {
+          value: false
+        },
         totalMemory: {
           value: false
         },
@@ -26,6 +29,9 @@
       },
       oneditprepare: function () {
         // select defaults
+        if (typeof this.relativeValues === 'undefined') {
+          $('#node-input-relativeValues').prop('checked', false)
+        }
         if (typeof this.totalMemory === 'undefined') {
           $('#node-input-totalMemory').prop('checked', false)
         }
@@ -46,6 +52,10 @@
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
   <div class="form-row">
+    <label for="node-input-relativeValues" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display relative values</label>
+    <input type="checkbox" id="node-input-relativeValues" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
     <label for="node-input-totalMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display total memory</label>
     <input type="checkbox" id="node-input-totalMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
@@ -61,4 +71,5 @@
 
 <script type="text/x-red" data-help-name="memory">
   <p>A node to monitor system memory usage</p>
+  <p>By default the values are calculated in megabyte</p>
 </script>

@@ -56,20 +56,21 @@
     <input type="checkbox" id="node-input-relativeValues" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
   <div class="form-row">
-    <label for="node-input-totalMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display total memory</label>
+    <label for="node-input-totalMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display total available memory</label>
     <input type="checkbox" id="node-input-totalMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
   <div class="form-row">
-    <label for="node-input-usedMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display used memory</label>
+    <label for="node-input-usedMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display actively used memory</label>
     <input type="checkbox" id="node-input-usedMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
   <div class="form-row">
-    <label for="node-input-freeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free memory</label>
+    <label for="node-input-freeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free actively usable memory</label>
     <input type="checkbox" id="node-input-freeMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
 </script>
 
 <script type="text/x-red" data-help-name="memory">
   <p>A node to monitor system memory usage</p>
-  <p>By default the values are calculated in megabyte</p>
+  <p>The absolute values are calculated in megabyte</p>
+  <p>Values are calculated with the actively usable memory, excl. buffers / cache (like systems do by default)</p>
 </script>

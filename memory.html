@@ -11,13 +11,13 @@
         relativeValues: {
           value: false
         },
-        totalMemory: {
+        availableMemory: {
           value: false
         },
-        usedMemory: {
+        activeMemory: {
           value: true
         },
-        freeMemory: {
+        freeAvailableMemory: {
           value: false
         }
       },
@@ -32,14 +32,14 @@
         if (typeof this.relativeValues === 'undefined') {
           $('#node-input-relativeValues').prop('checked', false)
         }
-        if (typeof this.totalMemory === 'undefined') {
-          $('#node-input-totalMemory').prop('checked', false)
+        if (typeof this.availableMemory === 'undefined') {
+          $('#node-input-availableMemory').prop('checked', false)
         }
-        if (typeof this.usedMemory === 'undefined') {
-          $('#node-input-usedMemory').prop('checked', true)
+        if (typeof this.activeMemory === 'undefined') {
+          $('#node-input-activeMemory').prop('checked', true)
         }
-        if (typeof this.freeMemory === 'undefined') {
-          $('#node-input-freeMemory').prop('checked', false)
+        if (typeof this.freeAvailableMemory === 'undefined') {
+          $('#node-input-freeAvailableMemory').prop('checked', false)
         }
       }
     }
@@ -56,16 +56,16 @@
     <input type="checkbox" id="node-input-relativeValues" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
   <div class="form-row">
-    <label for="node-input-totalMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display total available memory</label>
-    <input type="checkbox" id="node-input-totalMemory" style="display: inline-block; width: auto; vertical-align: top;">
+    <label for="node-input-availableMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display total available memory</label>
+    <input type="checkbox" id="node-input-availableMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
   <div class="form-row">
-    <label for="node-input-usedMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display actively used memory</label>
-    <input type="checkbox" id="node-input-usedMemory" style="display: inline-block; width: auto; vertical-align: top;">
+    <label for="node-input-activeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display actively used memory</label>
+    <input type="checkbox" id="node-input-activeMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
   <div class="form-row">
     <label for="node-input-freeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free actively usable memory</label>
-    <input type="checkbox" id="node-input-freeMemory" style="display: inline-block; width: auto; vertical-align: top;">
+    <input type="checkbox" id="node-input-freeAvailableMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
 </script>
 

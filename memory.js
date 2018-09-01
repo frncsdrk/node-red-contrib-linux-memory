@@ -11,9 +11,9 @@ module.exports = function (RED) {
 
     this.name = conf.name
     this.relativeValues = (typeof conf.relativeValues === 'undefined') ? false : conf.relativeValues
-    this.totalMemory = (typeof conf.totalMemory === 'undefined') ? false : conf.totalMemory
-    this.usedMemory = (typeof conf.usedMemory === 'undefined') ? true : conf.usedMemory
-    this.freeMemory = (typeof conf.freeMemory === 'undefined') ? false : conf.freeMemory
+    this.availableMemory = (typeof conf.availableMemory === 'undefined') ? false : conf.availableMemory
+    this.activeMemory = (typeof conf.activeMemory === 'undefined') ? true : conf.activeMemory
+    this.freeAvailableMemory = (typeof conf.freeAvailableMemory === 'undefined') ? false : conf.freeAvailableMemory
 
     const node = this
 
@@ -36,22 +36,22 @@ module.exports = function (RED) {
   }
 
   MemoryNode.prototype.calculatePayloadsAbsolute = function (data, payloadArr) {
-    if (this.totalMemory) {
+    if (this.availableMemory) {
       payloadArr.push({
         payload: toMb(data.available), // total
-        topic: 'memory_total_mb'
+        topic: 'memory_available_mb'
       })
     }
-    if (this.usedMemory) {
+    if (this.activeMemory) {
       payloadArr.push({
         payload: toMb(data.active), // used
         topic: 'memory_active_mb'
       })
     }
-    if (this.freeMemory) {
+    if (this.freeAvailableMemory) {
       payloadArr.push({
         payload: toMb(data.available - data.active), // free
-        topic: 'memory_active_free_mb'
+        topic: 'memory_free_available_mb'
       })
     }
 
@@ -59,19 +59,19 @@ module.exports = function (RED) {
   }
 
   MemoryNode.prototype.calculatePayloadsRelative = function (data, payloadArr) {
-    if (this.totalMemory) {
+    if (this.availableMemory) {
       payloadArr.push({
         payload: 100, // total
         topic: 'memory_available_per_cent'
       })
     }
-    if (this.usedMemory) {
+    if (this.activeMemory) {
       payloadArr.push({
         payload: toMb(data.active) / (toMb(data.available) / 100), // active
         topic: 'memory_active_per_cent'
       })
     }
-    if (this.freeMemory) {
+    if (this.freeAvailableMemory) {
       payloadArr.push({
         payload: toMb(data.available - data.active) / (toMb(data.available) / 100), // free excl. buffer / cache
         topic: 'memory_active_free_per_cent'

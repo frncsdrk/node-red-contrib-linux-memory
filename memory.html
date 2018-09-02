@@ -17,6 +17,9 @@
         activeMemory: {
           value: true
         },
+        buffcacheMemory: {
+          value: false
+        },
         freeAvailableMemory: {
           value: false
         },
@@ -27,6 +30,15 @@
           value: true
         },
         freeMemory: {
+          value: false
+        },
+        swapTotalMemory: {
+          value: false
+        },
+        swapUsedMemory: {
+          value: false
+        },
+        swapFreeMemory: {
           value: false
         }
       },
@@ -42,24 +54,40 @@
           $('#node-input-relativeValues').prop('checked', false)
         }
 
+        // excl. buffers / cache
         if (typeof this.availableMemory === 'undefined') {
           $('#node-input-availableMemory').prop('checked', false)
         }
         if (typeof this.activeMemory === 'undefined') {
           $('#node-input-activeMemory').prop('checked', true)
         }
+        if (typeof this.buffcacheMemory === 'undefined') {
+          $('#node-input-buffcacheMemory').prop('checked', false)
+        }
         if (typeof this.freeAvailableMemory === 'undefined') {
           $('#node-input-freeAvailableMemory').prop('checked', false)
         }
 
+        // incl. buffers / cache
         if (typeof this.totalMemory === 'undefined') {
           $('#node-input-totalMemory').prop('checked', false)
         }
         if (typeof this.usedMemory === 'undefined') {
-          $('#node-input-usedMemory').prop('checked', true)
+          $('#node-input-usedMemory').prop('checked', false)
         }
         if (typeof this.freeMemory === 'undefined') {
           $('#node-input-freeMemory').prop('checked', false)
+        }
+
+        // swap
+        if (typeof this.swapTotalMemory === 'undefined') {
+          $('#node-input-swapTotalMemory').prop('checked', false)
+        }
+        if (typeof this.swapUsedMemory === 'undefined') {
+          $('#node-input-swapUsedMemory').prop('checked', false)
+        }
+        if (typeof this.swapFreeMemory === 'undefined') {
+          $('#node-input-swapFreeMemory').prop('checked', false)
         }
       }
     }
@@ -88,6 +116,10 @@
     <input type="checkbox" id="node-input-activeMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
   <div class="form-row">
+    <label for="node-input-buffcacheMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display used memory by buffers and cache</label>
+    <input type="checkbox" id="node-input-buffcacheMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
     <label for="node-input-freeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free actively usable memory</label>
     <input type="checkbox" id="node-input-freeAvailableMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
@@ -107,6 +139,22 @@
     <label for="node-input-freeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free memory</label>
     <input type="checkbox" id="node-input-freeMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
+
+  <hr>
+
+  <h4>swap</h4>
+  <div class="form-row">
+    <label for="node-input-swapTotalMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display swap total memory</label>
+    <input type="checkbox" id="node-input-swapTotalMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
+    <label for="node-input-swapUsedMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display swap used memory</label>
+    <input type="checkbox" id="node-input-swapUsedMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
+    <label for="node-input-swapFreeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display swap free memory</label>
+    <input type="checkbox" id="node-input-swapFreeMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
 </script>
 
 <script type="text/x-red" data-help-name="memory">
@@ -115,4 +163,5 @@
   <p>The absolute values are calculated in megabyte.</p>
   <p>Values can be calculated with the actively usable memory, excl. buffers / cache (like systems do by default) or incl. buffer / cache.</p>
   <p>You can enable or disable calculating of relative values.</p>
+  <p>Swap relative values are calculated from the swap total</p>
 </script>

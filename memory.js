@@ -138,7 +138,7 @@ module.exports = function (RED) {
       { // available memory
         condition: this.availableMemory,
         result: {
-          payload: 100, // available
+          payload: toMb(data.available) / (toMb(data.total) / 100), // available
           topic: 'memory_available_per_cent'
         }
       },

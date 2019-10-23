@@ -11,6 +11,15 @@
         relativeValues: {
           value: false
         },
+        totalMemory: {
+          value: false
+        },
+        usedMemory: {
+          value: true
+        },
+        freeMemory: {
+          value: false
+        },
         availableMemory: {
           value: false
         },
@@ -21,15 +30,6 @@
           value: false
         },
         freeAvailableMemory: {
-          value: false
-        },
-        totalMemory: {
-          value: false
-        },
-        usedMemory: {
-          value: true
-        },
-        freeMemory: {
           value: false
         },
         swapTotalMemory: {
@@ -54,7 +54,18 @@
           $('#node-input-relativeValues').prop('checked', false)
         }
 
-        // excl. buffers / cache
+        // basic
+        if (typeof this.totalMemory === 'undefined') {
+          $('#node-input-totalMemory').prop('checked', false)
+        }
+        if (typeof this.usedMemory === 'undefined') {
+          $('#node-input-usedMemory').prop('checked', false)
+        }
+        if (typeof this.freeMemory === 'undefined') {
+          $('#node-input-freeMemory').prop('checked', false)
+        }
+
+        // advanced
         if (typeof this.availableMemory === 'undefined') {
           $('#node-input-availableMemory').prop('checked', false)
         }
@@ -64,19 +75,10 @@
         if (typeof this.buffcacheMemory === 'undefined') {
           $('#node-input-buffcacheMemory').prop('checked', false)
         }
+
+        // special
         if (typeof this.freeAvailableMemory === 'undefined') {
           $('#node-input-freeAvailableMemory').prop('checked', false)
-        }
-
-        // incl. buffers / cache
-        if (typeof this.totalMemory === 'undefined') {
-          $('#node-input-totalMemory').prop('checked', false)
-        }
-        if (typeof this.usedMemory === 'undefined') {
-          $('#node-input-usedMemory').prop('checked', false)
-        }
-        if (typeof this.freeMemory === 'undefined') {
-          $('#node-input-freeMemory').prop('checked', false)
         }
 
         // swap
@@ -106,27 +108,7 @@
 
   <hr>
 
-  <h4>excl. buffer / cache</h4>
-  <div class="form-row">
-    <label for="node-input-availableMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display available memory</label>
-    <input type="checkbox" id="node-input-availableMemory" style="display: inline-block; width: auto; vertical-align: top;">
-  </div>
-  <div class="form-row">
-    <label for="node-input-activeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display actively used memory</label>
-    <input type="checkbox" id="node-input-activeMemory" style="display: inline-block; width: auto; vertical-align: top;">
-  </div>
-  <div class="form-row">
-    <label for="node-input-buffcacheMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display used memory by buffers and cache</label>
-    <input type="checkbox" id="node-input-buffcacheMemory" style="display: inline-block; width: auto; vertical-align: top;">
-  </div>
-  <div class="form-row">
-    <label for="node-input-freeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free actively usable memory</label>
-    <input type="checkbox" id="node-input-freeAvailableMemory" style="display: inline-block; width: auto; vertical-align: top;">
-  </div>
-
-  <hr>
-
-  <h4>incl. buffer / cache</h4>
+  <h4>basic</h4>
   <div class="form-row">
     <label for="node-input-totalMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display total memory</label>
     <input type="checkbox" id="node-input-totalMemory" style="display: inline-block; width: auto; vertical-align: top;">
@@ -138,6 +120,30 @@
   <div class="form-row">
     <label for="node-input-freeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free memory</label>
     <input type="checkbox" id="node-input-freeMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+
+  <hr>
+
+  <h4>advanced</h4>
+  <div class="form-row">
+    <label for="node-input-availableMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display potentially available memory (= total - active)</label>
+    <input type="checkbox" id="node-input-availableMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
+    <label for="node-input-activeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display actively used memory (excl. buffers/cache)</label>
+    <input type="checkbox" id="node-input-activeMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
+    <label for="node-input-buffcacheMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display used memory by buffers and cache</label>
+    <input type="checkbox" id="node-input-buffcacheMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+
+  <hr>
+
+  <h4>special</h4>
+  <div class="form-row">
+    <label for="node-input-node-input-freeAvailableMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free actively usable memory (available - active)</label>
+    <input type="checkbox" id="node-input-freeAvailableMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
 
   <hr>
@@ -161,7 +167,6 @@
   <p>A node to monitor system memory usage</p>
   <hr>
   <p>The absolute values are calculated in megabyte.</p>
-  <p>Values can be calculated with the actively usable memory, excl. buffers / cache (like systems do by default) or incl. buffer / cache.</p>
   <p>You can enable or disable calculating of relative values.</p>
   <p>Swap relative values are calculated from the swap total</p>
 </script>

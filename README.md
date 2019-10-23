@@ -23,7 +23,7 @@ node-red-contrib-linux-memory
 
 ### calculation of relative values
 
-Relative values are calculated in their category, meaning that for example the swap relative free value is calculated from the swap total value.
+Relative values are from the amount of total system memory. The swap values are calculated indepndently of the memory.
 
 One can decide if to use absolute or relative values.
 

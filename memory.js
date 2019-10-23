@@ -82,7 +82,7 @@ module.exports = function (RED) {
       { // free available memory
         condition: this.freeAvailableMemory,
         result: {
-          payload: toMb(data.available - data.active), // free
+          payload: toMb(data.available - data.active), // free available (excl. buffer / cache)
           topic: 'memory_free_available_mb'
         }
       },
@@ -159,7 +159,7 @@ module.exports = function (RED) {
       { // free available memory
         condition: this.freeAvailableMemory,
         result: {
-          payload: toMb(data.available - data.active) / (toMb(data.available) / 100), // free available excl. buffer / cache
+          payload: toMb(data.available - data.active) / (toMb(data.available) / 100), // free available (excl. buffer / cache)
           topic: 'memory_free_available_per_cent'
         }
       },

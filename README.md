@@ -5,16 +5,18 @@ node-red-contrib-linux-memory
 
 ## available values
 
-**excl. buffer / cache**
-- available
-- active
-- buffer + cache
-- free available
-
-**incl. buffer / cache**
+**basic**
 - total
 - used
 - free
+
+**advanced**
+- available (= total - active)
+- active (excl. buffer/cache)
+- buffer + cache
+
+**special**
+- free available (available - active)
 
 **swap**
 - total

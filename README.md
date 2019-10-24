@@ -25,7 +25,7 @@ node-red-contrib-linux-memory
 
 ### calculation of relative values
 
-Relative values are from the amount of total system memory. The swap values are calculated indepndently of the memory.
+Relative values are from the amount of total system memory. The swap values are calculated independently of the memory.
 
 One can decide if to use absolute or relative values.
 

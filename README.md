@@ -16,7 +16,7 @@ node-red-contrib-linux-memory
 - buffer + cache
 
 **special**
-- free available (available - active)
+- free available (= available - active)
 
 **swap**
 - total

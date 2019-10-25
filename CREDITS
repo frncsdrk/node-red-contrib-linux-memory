@@ -2,7 +2,7 @@
         this file contains a list of contributors
         with a description of their contributions.
         The list is sorted alphabetically by username and
-	formatted to allow easy grepping and beautification
+	      formatted to allow easy grepping and beautification
         by scripts. The fields are: username (U), name (N),
         email (E), web-address (W), and description (D).
         Thanks,

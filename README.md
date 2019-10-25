@@ -12,8 +12,8 @@ node-red-contrib-linux-memory
 
 **advanced**
 - available (= total - active)
-- active (excl. buffer/cache)
-- buffer + cache
+- active (used actively excl. buffer/cache)
+- used by buffer + cache
 
 **special**
 - free available (= available - active)
@@ -34,6 +34,6 @@ One can decide if to use absolute or relative values.
 Linux is a registered trademark of Linus Torvalds.
 
 
-## Credits
+## Dependencies
 
 [systeminformation](https://github.com/sebhildebrandt/systeminformation)

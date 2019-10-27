@@ -33,6 +33,10 @@ One can decide if to use absolute or relative values.
 
 Linux is a registered trademark of Linus Torvalds.
 
+## Contributions
+
+see `CONTRIBUTING`
+
 ## Dependencies
 
 [systeminformation](https://github.com/sebhildebrandt/systeminformation)

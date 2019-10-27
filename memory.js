@@ -38,7 +38,8 @@ module.exports = function (RED) {
 
     const node = this
 
-    node.on('input', (msg) => {
+    node.on('input', (msg, send, done) => {
+      send = send || function() { node.send.apply(node,arguments) }
       si.mem()
         .then(data => {
           let payloadArr = []
@@ -48,10 +49,17 @@ module.exports = function (RED) {
           else {
             payloadArr = this.calculatePayloadsRelative(data, payloadArr)
           }
-          node.send([ payloadArr ])
+          send([ payloadArr ])
+          if (done) {
+            done()
+          }
         })
         .catch(err => {
-          node.error('SI mem Error', err.message)
+          if (done) {
+            done(err.message)
+          } else {
+            node.error('SI mem Error', err.message)
+          }
         })
     })
   }

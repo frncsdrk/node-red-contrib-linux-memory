@@ -27,6 +27,10 @@ module.exports = function (RED) {
     this.usedMemory = (typeof conf.usedMemory === 'undefined') ? false : conf.usedMemory
     this.freeMemory = (typeof conf.freeMemory === 'undefined') ? false : conf.freeMemory
 
+    this.buffersMemory = (typeof conf.buffersMemory === 'undefined') ? false : conf.buffersMemory
+    this.cachedMemory = (typeof conf.cachedMemory === 'undefined') ? false : conf.cachedMemory
+    this.slabMemory = (typeof conf.slabMemory === 'undefined') ? false : conf.slabMemory
+
     this.availableMemory = (typeof conf.availableMemory === 'undefined') ? false : conf.availableMemory
     this.activeMemory = (typeof conf.activeMemory === 'undefined') ? true : conf.activeMemory
     this.buffcacheMemory = (typeof conf.buffcacheMemory === 'undefined') ? true : conf.buffcacheMemory
@@ -85,6 +89,27 @@ module.exports = function (RED) {
         result: {
           payload: toMb(data.free), // free
           topic: 'memory_free_mb'
+        }
+      },
+      { // buffers memory
+        condition: this.buffersMemory,
+        result: {
+          payload: toMb(data.buffers), // buffers
+          topic: 'memory_buffers_mb'
+        }
+      },
+      { // cached memory
+        condition: this.cachedMemory,
+        result: {
+          payload: toMb(data.cached), // cached
+          topic: 'memory_cached_mb'
+        }
+      },
+      { // slab memory
+        condition: this.slabMemory,
+        result: {
+          payload: toMb(data.slab), // slab
+          topic: 'memory_slab_mb'
         }
       },
       { // available memory
@@ -162,6 +187,27 @@ module.exports = function (RED) {
         result: {
           payload: toMb(data.free) / (toMb(data.total) / 100), // free
           topic: 'memory_free_per_cent'
+        }
+      },
+      { // buffers memory
+        condition: this.buffersMemory,
+        result: {
+          payload: toMb(data.buffers) / (toMb(data.total) / 100), // buffers
+          topic: 'memory_buffers_per_cent'
+        }
+      },
+      { // cached memory
+        condition: this.cachedMemory,
+        result: {
+          payload: toMb(data.cached) / (toMb(data.total) / 100), // cached
+          topic: 'memory_cached_per_cent'
+        }
+      },
+      { // slab memory
+        condition: this.slabMemory,
+        result: {
+          payload: toMb(data.slab) / (toMb(data.total) / 100), // slab
+          topic: 'memory_slab_per_cent'
         }
       },
       { // available memory

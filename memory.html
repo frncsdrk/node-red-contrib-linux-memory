@@ -26,6 +26,15 @@
         activeMemory: {
           value: true
         },
+        buffersMemory: {
+          value: false
+        },
+        cachedMemory: {
+          value: false
+        },
+        slabMemory: {
+          value: false
+        },
         buffcacheMemory: {
           value: false
         },
@@ -63,6 +72,16 @@
         }
         if (typeof this.freeMemory === 'undefined') {
           $('#node-input-freeMemory').prop('checked', false)
+        }
+
+        if (typeof this.buffersMemory === 'undefined') {
+          $('#node-input-buffersMemory').prop('checked', false)
+        }
+        if (typeof this.cachedMemory === 'undefined') {
+          $('#node-input-cachedMemory').prop('checked', false)
+        }
+        if (typeof this.slabMemory === 'undefined') {
+          $('#node-input-slabMemory').prop('checked', false)
         }
 
         // advanced
@@ -120,6 +139,19 @@
   <div class="form-row">
     <label for="node-input-freeMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display free memory</label>
     <input type="checkbox" id="node-input-freeMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+
+  <div class="form-row">
+    <label for="node-input-buffersMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display memory used by buffers</label>
+    <input type="checkbox" id="node-input-buffersMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
+    <label for="node-input-cachedMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display memory used by cache</label>
+    <input type="checkbox" id="node-input-cachedMemory" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
+    <label for="node-input-slabMemory" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display memory used by slab</label>
+    <input type="checkbox" id="node-input-slabMemory" style="display: inline-block; width: auto; vertical-align: top;">
   </div>
 
   <hr>

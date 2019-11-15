@@ -9,6 +9,9 @@ node-red-contrib-linux-memory
 - total
 - used
 - free
+- buffers
+- cached
+- slab
 
 **advanced**
 - available (= total - active)

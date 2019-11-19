@@ -3,7 +3,15 @@ node-red-contrib-linux-memory
 
 > collect linux system memory stats
 
-## available values
+## Configuration
+
+### General
+
+- Name
+- Relative values flag
+- Unit type
+
+### Available values
 
 **basic**
 - total
@@ -26,7 +34,7 @@ node-red-contrib-linux-memory
 - used
 - free
 
-### calculation of relative values
+### Calculation of relative values
 
 Relative values are from the amount of total system memory. The swap values are calculated independently of the memory.
 

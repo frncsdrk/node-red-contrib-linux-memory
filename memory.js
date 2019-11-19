@@ -2,8 +2,34 @@ module.exports = function (RED) {
   // const exec = require('child_process').exec
   const si = require('systeminformation')
 
+  function toKb (val) {
+    return val / 1024
+  }
+
   function toMb (val) {
     return val / 1024 / 1024
+  }
+
+  function toGb (val) {
+    return val / 1024 / 1024 / 1024
+  }
+
+  function convertToUnit(unitType, val) {
+    let result
+    switch (unitType) {
+      case 'kb':
+        result = toKb(val)
+        break
+      case 'gb':
+        result = toGb(val)
+        break
+      // display as mb by default
+      default:
+        result = toMb(val)
+        break
+    }
+
+    return result
   }
 
   function aggregatePayloads (possiblePayloads, payloadArr) {
@@ -22,6 +48,7 @@ module.exports = function (RED) {
 
     this.name = conf.name
     this.relativeValues = (typeof conf.relativeValues === 'undefined') ? false : conf.relativeValues
+    this.unitType = conf.unitType
 
     this.totalMemory = (typeof conf.totalMemory === 'undefined') ? false : conf.totalMemory
     this.usedMemory = (typeof conf.usedMemory === 'undefined') ? false : conf.usedMemory
@@ -73,92 +100,92 @@ module.exports = function (RED) {
       { // total memory
         condition: this.totalMemory,
         result: {
-          payload: toMb(data.total), // total
-          topic: 'memory_total_mb'
+          payload: convertToUnit(this.unitType, data.total), // total
+          topic: 'memory_total'
         }
       },
       { // used memory
         condition: this.usedMemory,
         result: {
-          payload: toMb(data.used), // used
-          topic: 'memory_used_mb'
+          payload: convertToUnit(this.unitType, data.used), // used
+          topic: 'memory_used'
         }
       },
       { // free memory
         condition: this.freeMemory,
         result: {
-          payload: toMb(data.free), // free
-          topic: 'memory_free_mb'
+          payload: convertToUnit(this.unitType, data.free), // free
+          topic: 'memory_free'
         }
       },
       { // buffers memory
         condition: this.buffersMemory,
         result: {
-          payload: toMb(data.buffers), // buffers
-          topic: 'memory_buffers_mb'
+          payload: convertToUnit(this.unitType, data.buffers), // buffers
+          topic: 'memory_buffers'
         }
       },
       { // cached memory
         condition: this.cachedMemory,
         result: {
-          payload: toMb(data.cached), // cached
-          topic: 'memory_cached_mb'
+          payload: convertToUnit(this.unitType, data.cached), // cached
+          topic: 'memory_cached'
         }
       },
       { // slab memory
         condition: this.slabMemory,
         result: {
-          payload: toMb(data.slab), // slab
-          topic: 'memory_slab_mb'
+          payload: convertToUnit(this.unitType, data.slab), // slab
+          topic: 'memory_slab'
         }
       },
       { // available memory
         condition: this.availableMemory,
         result: {
-          payload: toMb(data.available), // available
-          topic: 'memory_available_mb'
+          payload: convertToUnit(this.unitType, data.available), // available
+          topic: 'memory_available'
         }
       },
       { // active memory
         condition: this.activeMemory,
         result: {
-          payload: toMb(data.active), // active
-          topic: 'memory_active_mb'
+          payload: convertToUnit(this.unitType, data.active), // active
+          topic: 'memory_active'
         }
       },
       { // buffcache memory
         condition: this.buffcacheMemory,
         result: {
-          payload: toMb(data.buffcache), // buffcache
-          topic: 'memory_buffcache_mb'
+          payload: convertToUnit(this.unitType, data.buffcache), // buffcache
+          topic: 'memory_buffcache'
         }
       },
       { // free available memory
         condition: this.freeAvailableMemory,
         result: {
-          payload: toMb(data.available - data.active), // free available (excl. buffer / cache)
-          topic: 'memory_free_available_mb'
+          payload: convertToUnit(this.unitType, data.available - data.active), // free available (excl. buffer / cache)
+          topic: 'memory_free_available'
         }
       },
       { // swap total memory
         condition: this.swapTotalMemory,
         result: {
-          payload: toMb(data.swaptotal), // swap total
-          topic: 'memory_swap_total_mb'
+          payload: convertToUnit(this.unitType, data.swaptotal), // swap total
+          topic: 'memory_swap_total'
         }
       },
       { // swap used memory
         condition: this.swapUsedMemory,
         result: {
-          payload: toMb(data.swapused), // swap used
-          topic: 'memory_swap_used_mb'
+          payload: convertToUnit(this.unitType, data.swapused), // swap used
+          topic: 'memory_swap_used'
         }
       },
       { // swap free memory
         condition: this.swapFreeMemory,
         result: {
-          payload: toMb(data.swapfree), // swap free
-          topic: 'memory_swap_free_mb'
+          payload: convertToUnit(this.unitType, data.swapfree), // swap free
+          topic: 'memory_swap_free'
         }
       }
     ]
@@ -178,63 +205,63 @@ module.exports = function (RED) {
       { // used memory
         condition: this.usedMemory,
         result: {
-          payload: toMb(data.used) / (toMb(data.total) / 100), // used
+          payload: convertToUnit(this.unitType, data.used) / (convertToUnit(this.unitType, data.total) / 100), // used
           topic: 'memory_used_per_cent'
         }
       },
       { // free memory
         condition: this.freeMemory,
         result: {
-          payload: toMb(data.free) / (toMb(data.total) / 100), // free
+          payload: convertToUnit(this.unitType, data.free) / (convertToUnit(this.unitType, data.total) / 100), // free
           topic: 'memory_free_per_cent'
         }
       },
       { // buffers memory
         condition: this.buffersMemory,
         result: {
-          payload: toMb(data.buffers) / (toMb(data.total) / 100), // buffers
+          payload: convertToUnit(this.unitType, data.buffers) / (convertToUnit(this.unitType, data.total) / 100), // buffers
           topic: 'memory_buffers_per_cent'
         }
       },
       { // cached memory
         condition: this.cachedMemory,
         result: {
-          payload: toMb(data.cached) / (toMb(data.total) / 100), // cached
+          payload: convertToUnit(this.unitType, data.cached) / (convertToUnit(this.unitType, data.total) / 100), // cached
           topic: 'memory_cached_per_cent'
         }
       },
       { // slab memory
         condition: this.slabMemory,
         result: {
-          payload: toMb(data.slab) / (toMb(data.total) / 100), // slab
+          payload: convertToUnit(this.unitType, data.slab) / (convertToUnit(this.unitType, data.total) / 100), // slab
           topic: 'memory_slab_per_cent'
         }
       },
       { // available memory
         condition: this.availableMemory,
         result: {
-          payload: toMb(data.available) / (toMb(data.total) / 100), // available
+          payload: convertToUnit(this.unitType, data.available) / (convertToUnit(this.unitType, data.total) / 100), // available
           topic: 'memory_available_per_cent'
         }
       },
       { // active memory
         condition: this.activeMemory,
         result: {
-          payload: toMb(data.active) / (toMb(data.available) / 100), // active
+          payload: convertToUnit(this.unitType, data.active) / (convertToUnit(this.unitType, data.available) / 100), // active
           topic: 'memory_active_per_cent'
         }
       },
       { // buffcache memory
         condition: this.buffcacheMemory,
         result: {
-          payload: toMb(data.buffcache) / (toMb(data.available) / 100), // buffcache
+          payload: convertToUnit(this.unitType, data.buffcache) / (convertToUnit(this.unitType, data.available) / 100), // buffcache
           topic: 'memory_buffcache_per_cent'
         }
       },
       { // free available memory
         condition: this.freeAvailableMemory,
         result: {
-          payload: toMb(data.available - data.active) / (toMb(data.available) / 100), // free available (excl. buffer / cache)
+          payload: convertToUnit(this.unitType, data.available - data.active) / (convertToUnit(this.unitType, data.available) / 100), // free available (excl. buffer / cache)
           topic: 'memory_free_available_per_cent'
         }
       },
@@ -248,14 +275,14 @@ module.exports = function (RED) {
       { // swap used memory
         condition: this.swapUsedMemory,
         result: {
-          payload: toMb(data.swapused) / (toMb(data.swaptotal) / 100), // swap used
+          payload: convertToUnit(this.unitType, data.swapused) / (convertToUnit(this.unitType, data.swaptotal) / 100), // swap used
           topic: 'memory_swap_used_per_cent'
         }
       },
       { // swap free memory
         condition: this.swapFreeMemory,
         result: {
-          payload: toMb(data.swapfree) / (toMb(data.swaptotal) / 100), // swap free
+          payload: convertToUnit(this.unitType, data.swapfree) / (convertToUnit(this.unitType, data.swaptotal) / 100), // swap free
           topic: 'memory_swap_free_per_cent'
         }
       }

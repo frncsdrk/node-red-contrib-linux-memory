@@ -11,6 +11,9 @@
         relativeValues: {
           value: false
         },
+        unitType: {
+          value: 'mb'
+        },
         totalMemory: {
           value: false
         },
@@ -59,8 +62,13 @@
       },
       oneditprepare: function () {
         // select defaults
+        // relative values
         if (typeof this.relativeValues === 'undefined') {
           $('#node-input-relativeValues').prop('checked', false)
+        }
+        // unit
+        if (typeof this.unitType === 'undefined') {
+          $('#node-input-unitTypeMb').prop('selected', true)
         }
 
         // basic
@@ -123,6 +131,14 @@
   <div class="form-row">
     <label for="node-input-relativeValues" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Display relative values</label>
     <input type="checkbox" id="node-input-relativeValues" style="display: inline-block; width: auto; vertical-align: top;">
+  </div>
+  <div class="form-row">
+    <label for="node-input-unitType" style="width: auto; margin-right: 1em;"><i class="icon-check"></i> Select unit type</label>
+    <select id="node-input-unitType" style="display: inline-block; width: auto; vertical-align: top;">
+      <option value="kb">Kilobyte</option>
+      <option id="node-input-unitTypeMb" value="mb" selected>Megabyte</option>
+      <option value="gb">Gigabyte</option>
+    </select>
   </div>
 
   <hr>

@@ -1,7 +1,6 @@
-node-red-contrib-linux-memory
-===
+# node-red-contrib-linux-memory
 
-> collect linux system memory stats
+> Collect linux system memory stats
 
 ## Configuration
 

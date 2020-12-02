@@ -29,6 +29,6 @@
     }
   },
   "dependencies": {
-    "systeminformation": "^4.28.1"
+    "systeminformation": "^4.30.11"
   }
 }
